@@ -14,3 +14,19 @@
 
 <app-server></app-server>
 <app-server></app-server>
+
+<hr>
+<p>--- Exercise ---</p>
+<label>Username</label>
+<input
+  class="form-control"
+  type="text"
+  placeholder="Fill the username"
+  [(ngModel)]="username"/>
+<p>The entered username is: {{ username }}</p>
+<button
+  class="btn btn-primary"
+  [disabled]="!username"
+  (click)="onResetUsername()">
+  Clear Username
+</button>
