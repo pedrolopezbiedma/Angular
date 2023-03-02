@@ -6,10 +6,15 @@ import { Component } from '@angular/core';
 })
 export class ServersComponent {
   allowNewServer: boolean = false;
+  serverCreationStatus: string = 'No server was created';
 
   constructor() {
     setTimeout(() => {
       this.allowNewServer = true;
     }, 3000);
+  }
+
+  onCreateServer(payload: number) {
+    this.serverCreationStatus = 'A server was created! ' + payload;
   }
 }
