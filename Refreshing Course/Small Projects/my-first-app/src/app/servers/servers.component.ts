@@ -15,8 +15,8 @@ export class ServersComponent {
     }, 3000);
   }
 
-  onCreateServer(payload: number) {
-    this.serverCreationStatus = 'A server was created! ' + payload;
+  onCreateServer() {
+    this.serverCreationStatus = 'A server was created, name is: ' + this.serverName;
   }
 
   onInputChange(event: any) {
