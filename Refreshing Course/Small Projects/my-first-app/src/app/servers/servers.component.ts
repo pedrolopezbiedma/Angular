@@ -5,5 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './servers.component.html'
 })
 export class ServersComponent {
+  allowNewServer: boolean = false;
 
+  constructor() {
+    setTimeout(() => {
+      this.allowNewServer = true;
+    }, 3000);
+  }
 }
