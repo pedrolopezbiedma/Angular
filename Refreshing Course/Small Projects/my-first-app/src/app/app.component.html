@@ -5,6 +5,18 @@
       <hr>
       <app-servers></app-servers>
       <hr>
+      <h1> ##### Exercise 5 ##### </h1>
+      <button
+        class="btn btn-primary"
+        (click)="togglePassword()"> Display Details
+      </button>
+      <p *ngIf="detailsDisplayed"> Secret password: comemela FF!</p>
+
+      <p>Logging clicks...</p>
+      <p
+        *ngFor="let log of clicksLog; index as i"
+        [ngStyle]="{background: i >= 4 ? 'blue': 'white' }"
+        [ngClass]="{whiteColor: i >= 4}"> {{ log }}</p>
     </div>
   </div>
 </div>
