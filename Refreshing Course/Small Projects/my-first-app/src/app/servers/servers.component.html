@@ -9,7 +9,10 @@
 </button>
 <br><br>
 
-<p *ngIf="serverCreated">{{ serverCreationStatus }}</p>
+<p *ngIf="serverCreated;else noServer">{{ serverCreationStatus }}</p>
+<ng-template #noServer>
+  <p>No server was created</p>
+</ng-template>
 <hr>
 
 <app-server></app-server>
