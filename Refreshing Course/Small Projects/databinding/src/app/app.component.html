@@ -10,3 +10,17 @@
     </div>
   </div>
 </div>
+<hr>
+<div class="container">
+<h2>Exercise: Game Board</h2>
+  <app-game-control
+    (secondPassed)="onSecondPassed($event)">
+  </app-game-control>
+  <hr>
+  <ul>
+    <li *ngFor="let second of secondsReceived">
+      <app-odd-number *ngIf="second % 2 !== 0" [num]="second"></app-odd-number>
+      <app-even-number *ngIf="second % 2 === 0" [num]="second"></app-even-number>
+    </li>
+  </ul>
+</div>

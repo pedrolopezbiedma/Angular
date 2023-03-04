@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   serverElements = [{ name: 'Test Server', type: 'server', content:'Test Content'}];
+  secondsReceived: number[] = [];
 
   onServerCreated(createdServer: { name: string, content: string}) {
     this.serverElements.push({
@@ -22,5 +23,9 @@ export class AppComponent {
       name: createdBlueprint.name,
       content: createdBlueprint.content
     });
+  }
+
+  onSecondPassed(secondPassed: number){
+    this.secondsReceived.push(secondPassed);
   }
 }
