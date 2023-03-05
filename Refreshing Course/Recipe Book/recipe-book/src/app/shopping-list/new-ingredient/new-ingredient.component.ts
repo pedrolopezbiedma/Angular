@@ -2,6 +2,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 // Components & Models
+import { ShoppingListService } from 'src/app/shared/shopping-list.service';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 
 @Component({
@@ -14,8 +15,11 @@ export class NewIngredientComponent {
   name: string = '';
   amount: number = 0;
 
+  constructor(private shoppingListService: ShoppingListService){}
+
   onAddIngredient(): void {
-    this.addedIngredient.emit(new Ingredient(this.name, this.amount));
+    // this.addedIngredient.emit(new Ingredient(this.name, this.amount));
+    this.shoppingListService.addIngredient(new Ingredient(this.name, this.amount));
     this.clearForm();
   }
 
