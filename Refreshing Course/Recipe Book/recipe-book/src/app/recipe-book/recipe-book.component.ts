@@ -1,7 +1,8 @@
 // Angular
 import { Component } from '@angular/core';
 
-// Components & Models
+// Components, Services & Models
+import { RecipesService } from '../shared/recipes.service';
 import { Recipe } from './recipe.model';
 @Component({
   selector: 'app-recipe-book',
@@ -11,7 +12,11 @@ import { Recipe } from './recipe.model';
 export class RecipeBookComponent {
   displayedRecipe: Recipe;
 
-  onClickedRecipe(clickedRecipe: Recipe): void {
-    this.displayedRecipe = clickedRecipe;
+  constructor(private recipesService: RecipesService){}
+
+  ngOnInit(){
+    this.recipesService.selectedRecipe.subscribe((recipe: Recipe) => {
+      this.displayedRecipe = recipe;
+    });
   }
 }

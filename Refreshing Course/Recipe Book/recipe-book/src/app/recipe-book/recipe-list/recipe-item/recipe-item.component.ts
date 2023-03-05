@@ -1,7 +1,8 @@
 // Angular
 import { Component, Input } from '@angular/core';
 
-// Components & Models
+// Components, Services & Models
+import { RecipesService } from 'src/app/shared/recipes.service';
 import { Recipe } from '../../recipe.model';
 
 @Component({
@@ -11,4 +12,10 @@ import { Recipe } from '../../recipe.model';
 })
 export class RecipeItemComponent {
   @Input() recipe:Recipe;
+
+  constructor(private recipesService: RecipesService){}
+
+  onSelectedRecipe(recipe: Recipe){
+    this.recipesService.onSelectedRecipe(recipe);
+  }
 }
