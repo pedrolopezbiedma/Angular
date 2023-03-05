@@ -8,8 +8,7 @@ import { LoggingService } from '../shared/services/logging.service';
 @Component({
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
-  styleUrls: ['./new-account.component.css'],
-  providers: [LoggingService]
+  styleUrls: ['./new-account.component.css']
 })
 export class NewAccountComponent {
 
