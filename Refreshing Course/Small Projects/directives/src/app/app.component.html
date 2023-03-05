@@ -25,7 +25,12 @@
       </ul>
       <hr>
       <p appBasicHighlight>My basic directive is here</p>
-      <p appBetterHighlight>My better directive is here</p>
+      <p appBetterHighlight [defaultColor]="'green'" [highlightColor]="'red'">My better directive is here</p>
+      <div [ngSwitch]="switchValue">
+        <div *ngSwitchCase=5>Switch is 5</div>
+        <div *ngSwitchCase=10>Switch is 10</div>
+        <div *ngSwitchCase=15>Switch is 15</div>
+      </div>
     </div>
   </div>
 </div>
