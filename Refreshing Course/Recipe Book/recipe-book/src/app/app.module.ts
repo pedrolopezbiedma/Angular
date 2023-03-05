@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+// Directives
+import { DropdownDirective } from './shared/dropdown.directive';
+
+// Components & Models
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
@@ -20,7 +24,8 @@ import { NewIngredientComponent } from './shopping-list/new-ingredient/new-ingre
     RecipeItemComponent,
     RecipeDetailsComponent,
     ShoppingListComponent,
-    NewIngredientComponent
+    NewIngredientComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
