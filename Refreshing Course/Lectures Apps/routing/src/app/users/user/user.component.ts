@@ -1,7 +1,6 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -19,7 +18,7 @@ export class UserComponent implements OnInit {
       name: this.route.snapshot.params['name']
     }
 
-    this.route.params.subscribe((params:Observable<Params>) => {
+    this.route.params.subscribe((params:Params) => {
       this.user = {
         id: params['id'],
         name: params['name']
