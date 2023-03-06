@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { ServersService } from '../servers.service';
 
@@ -9,6 +10,7 @@ import { ServersService } from '../servers.service';
   styleUrls: ['./server.component.css']
 })
 export class ServerComponent implements OnInit {
+  routeSubscription: Subscription;
   server: {id: number, name: string, status: string};
 
   constructor(
@@ -20,7 +22,10 @@ export class ServerComponent implements OnInit {
     let serverId: number = +this.route.snapshot.params['id'];
     this.server = this.serversService.getServer(serverId);
 
-    
+    this.routeSubscription = this.route.params.subscribe((params: Params) => {
+      let serverId: number = +this.route.snapshot.params['id'];
+      this.server = this.serversService.getServer(serverId);
+    })
   }
 
 }

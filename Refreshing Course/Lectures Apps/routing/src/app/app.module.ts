@@ -16,10 +16,12 @@ import { ServersService } from './servers/servers.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'users/:id/:name', component: UserComponent },
-  { path: 'servers', component: ServersComponent },
-  { path: 'servers/:id', component: ServerComponent },
+  { path: 'users', component: UsersComponent, children: [
+    { path: ':id/:name', component: UserComponent },
+  ]},
+  { path: 'servers', component: ServersComponent, children: [
+    { path: ':id', component: ServerComponent },
+  ]}
 ];
 
 @NgModule({
