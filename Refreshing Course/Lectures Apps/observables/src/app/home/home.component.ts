@@ -20,12 +20,24 @@ export class HomeComponent implements OnInit, OnDestroy {
       let count = 0;
       setInterval(() => {
         observer.next(count)
+
+        if( count > 5 ){
+          observer.complete()
+        }
+
+        if( count > 10 ){
+          observer.error(new Error('Count is greater than 3'))
+        }
         count++;
       }, 1000)
     });
 
     this.firstObsSubscription = myObservable.subscribe((count: Number) => {
       console.log(count);
+    }, (error => {
+      console.log('error is -->', error)
+    }), () => {
+      console.log('The observable is completed');
     })
   }
 
