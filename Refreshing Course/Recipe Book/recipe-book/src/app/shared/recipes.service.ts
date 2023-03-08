@@ -1,5 +1,5 @@
 // Angular
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 // Components, Services & Models
 import { Recipe } from '../recipe-book/recipe.model';
@@ -7,7 +7,6 @@ import { Ingredient } from './ingredient.model';
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
-  @Output() selectedRecipe = new EventEmitter<Recipe>();
 
   private recipes:Recipe[] = [
     new Recipe(
@@ -34,4 +33,5 @@ export class RecipesService {
       return recipe.recipeId === +recipeId;
     });
   }
+
 }
