@@ -1,6 +1,6 @@
 // Angular
 import { Component } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RecipesService } from 'src/app/shared/recipes.service';
 
 // Components, Services & Models
@@ -17,6 +17,7 @@ export class RecipeDetailsComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router:Router,
     private recipesService: RecipesService,
     private shoppingListService: ShoppingListService,
   ){}
@@ -29,5 +30,9 @@ export class RecipeDetailsComponent {
 
   onToShoppingList(): void {
     this.shoppingListService.toShoppingList(this.recipe.ingredients);
+  }
+
+  onEditRecipe(): void {
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 }
