@@ -11,11 +11,13 @@ export class RecipesService {
 
   private recipes:Recipe[] = [
     new Recipe(
+      1,
       'Test Recipe 1 Name',
       'Test Recipe 1 Description',
       'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
       [new Ingredient('Pan', 5), new Ingredient('Mermelada', 1)]),
     new Recipe(
+      2,
       'Test Recipe 2 Name',
       'Test Recipe 2 Description',
       'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
@@ -27,7 +29,9 @@ export class RecipesService {
     return this.recipes.slice();
   }
 
-  onSelectedRecipe(recipe: Recipe): void {
-    this.selectedRecipe.emit(recipe);
+  getRecipe(recipeId: number): Recipe {
+    return this.recipes.find((recipe: Recipe) => {
+      return recipe.recipeId === +recipeId;
+    });
   }
 }
