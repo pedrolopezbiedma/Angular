@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,9 +6,4 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  @Output() clickedNavbar = new EventEmitter<string>();
-
-  onNavigationClicked(clickedLink: string): void {
-    this.clickedNavbar.emit(clickedLink);
-  }
 }

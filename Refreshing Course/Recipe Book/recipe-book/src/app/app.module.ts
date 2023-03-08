@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+// Angular
+import { AppRoutingModule } from './app-routing.module';
+
 // Directives
 import { DropdownDirective } from './shared/dropdown.directive';
 
-// Components & Models
+// Components, Services & Models
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RecipeBookComponent } from './recipe-book/recipe-book.component';
@@ -29,7 +32,8 @@ import { NewIngredientComponent } from './shopping-list/new-ingredient/new-ingre
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
