@@ -28,11 +28,13 @@
         <p>Your reply is {{ answer }}</p>
         <div class="radio" *ngFor="let gender of genders">
           <label>
-            <input type="radio" name="gender" value="gender" ngModel/> {{ gender }}
+            <input type="radio" name="gender" [value]="gender" ngModel/> {{ gender }}
           </label>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="isFormInvalid(form)">Submit</button>
       </form>
+      <hr>
+      <p>Username: {{ username }}</p>
     </div>
   </div>
 </div>

@@ -9,7 +9,8 @@ import { NgForm } from '@angular/forms';
 export class AppComponent {
   answer: string;
   genders: String[] = [ 'Male', 'Female'];
-  selectedGender: string;
+  selectedGender: String;
+  username: String;
 
   suggestUserName(form: NgForm) {
     const suggestedName = 'Superuser';
@@ -21,7 +22,9 @@ export class AppComponent {
   }
 
   onSubmit(form: NgForm): void {
-    console.log('form is -->', form);
+    console.log(form)
+    this.username = form.value.userData.username;
+    form.reset();
   }
 
   isFormInvalid(form: NgForm){
