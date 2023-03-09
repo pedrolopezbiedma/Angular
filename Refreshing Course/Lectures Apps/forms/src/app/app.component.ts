@@ -14,4 +14,8 @@ export class AppComponent {
   onSubmit(form: NgForm): void {
     console.log('form is -->', form);
   }
+
+  isFormInvalid(form: NgForm){
+    return form.invalid;
+  }
 }
