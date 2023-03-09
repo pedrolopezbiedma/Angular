@@ -7,6 +7,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  answer: string;
+
   suggestUserName() {
     const suggestedName = 'Superuser';
   }
