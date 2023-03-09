@@ -19,19 +19,9 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
-  onSelectedIngredient(ingredient: Ingredient): void {
-    this.selectedIngredient.next(ingredient);
-  }
-
   addIngredient(ingredient: Ingredient): void {
     this.ingredients.push(ingredient);
     this.updatedIngredients.next(this.getIngredients());
-  }
-
-  toShoppingList(ingredients: Ingredient[]): void {
-    ingredients.forEach((ingredient: Ingredient) => {
-      this.addIngredient(ingredient);
-    })
   }
 
   editIngredient(editedIngredient: Ingredient){
@@ -50,5 +40,15 @@ export class ShoppingListService {
 
     this.ingredients.splice(index, 1)
     this.updatedIngredients.next(this.getIngredients());
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]): void {
+    ingredients.forEach((ingredient: Ingredient) => {
+      this.addIngredient(ingredient);
+    })
+  }
+
+  emitSelectedIngredient(ingredient: Ingredient): void {
+    this.selectedIngredient.next(ingredient);
   }
 }

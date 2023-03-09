@@ -29,7 +29,7 @@ export class RecipeDetailsComponent {
   }
 
   onToShoppingList(): void {
-    this.shoppingListService.toShoppingList(this.recipe.ingredients);
+    this.shoppingListService.addIngredientsToShoppingList(this.recipe.ingredients);
   }
 
   onEditRecipe(): void {
