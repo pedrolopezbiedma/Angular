@@ -8,6 +8,7 @@ import { Ingredient } from './ingredient.model';
 @Injectable({providedIn: 'root'})
 export class ShoppingListService {
   updatedIngredients = new Subject<Ingredient[]>();
+  selectedIngredient = new Subject<Ingredient>();
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
@@ -18,16 +19,18 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
+  addIngredient(ingredient: Ingredient): void {
+    this.ingredients.push(ingredient);
+    this.updatedIngredients.next(this.getIngredients());
+  }
+
   toShoppingList(ingredients: Ingredient[]): void {
     ingredients.forEach((ingredient: Ingredient) => {
       this.addIngredient(ingredient);
     })
   }
 
-  addIngredient(ingredient: Ingredient): void {
-    this.ingredients.push(ingredient);
-    this.updatedIngredients.next(this.getIngredients());
+  onSelectedIngredient(ingredient: Ingredient): void {
+    this.selectedIngredient.next(ingredient);
   }
-
-
 }

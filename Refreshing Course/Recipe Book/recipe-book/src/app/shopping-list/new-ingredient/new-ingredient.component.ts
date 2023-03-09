@@ -1,5 +1,7 @@
 // Angular
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 // Components & Models
 import { ShoppingListService } from 'src/app/shared/shopping-list.service';
@@ -10,21 +12,32 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
   templateUrl: './new-ingredient.component.html',
   styleUrls: ['./new-ingredient.component.css']
 })
-export class NewIngredientComponent {
-  @Output() addedIngredient = new EventEmitter<Ingredient>();
-  name: string = '';
-  amount: number = 0;
+export class NewIngredientComponent implements OnInit, OnDestroy {
+  selectedIngredientSubscription: Subscription;
+  name: String;
+  amount: Number;
 
-  constructor(private shoppingListService: ShoppingListService){}
+  constructor(
+    private shoppingListService: ShoppingListService
+  ){}
 
-  onAddIngredient(): void {
-    // this.addedIngredient.emit(new Ingredient(this.name, this.amount));
-    this.shoppingListService.addIngredient(new Ingredient(this.name, this.amount));
-    this.clearForm();
+  ngOnInit(): void {
+    this.selectedIngredientSubscription = this.shoppingListService.selectedIngredient.subscribe((selectedIngredient: Ingredient) => {
+      this.name = selectedIngredient.name;
+      this.amount = selectedIngredient.amount
+    })
   }
 
-  clearForm(): void {
-    this.name = '';
-    this.amount = 0;
+  onAddIngredient(newIngredientForm: NgForm): void {
+    this.shoppingListService.addIngredient(new Ingredient(newIngredientForm.value.name, newIngredientForm.value.amount));
+    this.clearForm(newIngredientForm);
+  }
+
+  clearForm(newIngredientForm: NgForm): void {
+    newIngredientForm.reset();
+  }
+
+  ngOnDestroy(): void {
+    this.selectedIngredientSubscription.unsubscribe();
   }
 }
