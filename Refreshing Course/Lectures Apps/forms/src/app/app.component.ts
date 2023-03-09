@@ -8,9 +8,16 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   answer: string;
+  genders: String[] = [ 'Male', 'Female'];
+  selectedGender: string;
 
-  suggestUserName() {
+  suggestUserName(form: NgForm) {
     const suggestedName = 'Superuser';
+    form.form.patchValue({
+      userData : {
+        username: suggestedName
+      }
+    })
   }
 
   onSubmit(form: NgForm): void {
