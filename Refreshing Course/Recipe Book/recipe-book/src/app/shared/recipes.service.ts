@@ -14,13 +14,13 @@ export class RecipesService {
       'Test Recipe 1 Name',
       'Test Recipe 1 Description',
       'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
-      [new Ingredient('Pan', 5), new Ingredient('Mermelada', 1)]),
+      [new Ingredient(Math.floor(Math.random() * 1000),'Pan', 5), new Ingredient(Math.floor(Math.random() * 1000), 'Mermelada', 1)]),
     new Recipe(
       2,
       'Test Recipe 2 Name',
       'Test Recipe 2 Description',
       'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
-      [new Ingredient('Patatas', 5), new Ingredient('Huevo', 1)]
+      [new Ingredient(Math.floor(Math.random() * 1000), 'Patatas', 5), new Ingredient(Math.floor(Math.random() * 1000), 'Huevo', 1)]
       )
   ];
 

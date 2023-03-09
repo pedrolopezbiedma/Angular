@@ -11,12 +11,16 @@ export class ShoppingListService {
   selectedIngredient = new Subject<Ingredient>();
 
   private ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10),
+    new Ingredient(Math.floor(Math.random() * 1000), 'Apples', 5),
+    new Ingredient(Math.floor(Math.random() * 1000), 'Tomatoes', 10),
   ];
 
   getIngredients(): Ingredient[] {
     return this.ingredients.slice();
+  }
+
+  onSelectedIngredient(ingredient: Ingredient): void {
+    this.selectedIngredient.next(ingredient);
   }
 
   addIngredient(ingredient: Ingredient): void {
@@ -30,7 +34,21 @@ export class ShoppingListService {
     })
   }
 
-  onSelectedIngredient(ingredient: Ingredient): void {
-    this.selectedIngredient.next(ingredient);
+  editIngredient(editedIngredient: Ingredient){
+    let index = this.ingredients.findIndex((ingredient: Ingredient) => {
+      return ingredient.ingredientId === editedIngredient.ingredientId
+    })
+
+    this.ingredients[index] = editedIngredient;
+    this.updatedIngredients.next(this.getIngredients());
+  }
+
+  removeIngredient(removeIngredient: Ingredient): void {
+    let index = this.ingredients.findIndex((ingredient: Ingredient) => {
+      return ingredient.ingredientId === removeIngredient.ingredientId
+    })
+
+    this.ingredients.splice(index, 1)
+    this.updatedIngredients.next(this.getIngredients());
   }
 }
