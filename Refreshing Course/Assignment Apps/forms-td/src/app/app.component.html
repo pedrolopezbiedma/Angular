@@ -14,5 +14,28 @@
            Optionally, display it in your template.
       -->
     </div>
+    <hr>
+    <form (ngSubmit)='onSubmit(form)' #form="ngForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" name="email" required email ngModel #email="ngModel">
+        <p *ngIf="email.invalid && email.touched">This field is invalid</p>
+      </div>
+      <div class="form-group">
+        <label for="subscriptionType">Subscription Type</label>
+        <select id="subscriptionType" class="form-control" name="subscriptionType" [ngModel]="'advanced'" #subscriptionType="ngModel" required>
+          <option value="basic">Basic</option>
+          <option value="advanced">Advanced</option>
+          <option value="Pro">Pro</option>
+        </select>
+        <p *ngIf="subscriptionType.invalid && subscriptionType.touched">This field is invalid</p>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="text" id="password" class="form-control" name="password" required ngModel #password="ngModel">
+        <p *ngIf="password.invalid && password.touched">This field is invalid</p>
+      </div>
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
   </div>
 </div>
