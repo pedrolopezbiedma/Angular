@@ -65,6 +65,15 @@ export class RecipeEditComponent {
     });
   }
 
+  onAddIngredientToRecipeForm(): void {
+    this.controls.push(
+      new FormGroup({
+        'name': new FormControl(null),
+        'amount': new FormControl(null)
+      })
+    )
+  }
+
   onSubmit(): void {
     console.log(this.recipeForm.value)
   }
