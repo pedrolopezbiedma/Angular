@@ -1,11 +1,12 @@
 // Angular
 import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // Components, Services & Models
 import { RecipesService } from 'src/app/shared/recipes.service';
+import { Ingredient } from 'src/app/shared/ingredient.model';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -19,6 +20,7 @@ export class RecipeEditComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private recipesService: RecipesService
   ) {}
 
@@ -74,7 +76,41 @@ export class RecipeEditComponent {
     )
   }
 
+  onRemoveIngredientFromRecipeForm(index: number): void{
+    this.controls.splice(index, 1);
+  }
+
   onSubmit(): void {
     console.log(this.recipeForm.value)
+
+    let updatedIngredients: Ingredient[] = [];
+    this.controls.forEach(control => {
+      updatedIngredients.push(new Ingredient(Math.floor(Math.random() * 1000), control.get('name').value, control.get('amount').value));
+    })
+
+    if(this.editMode){
+      this.recipesService.editRecipe({
+        recipeId: +this.recipeId,
+        name: this.recipeForm.value.name,
+        description: this.recipeForm.value.description,
+        imagePath: this.recipeForm.value.imagePath,
+        ingredients: updatedIngredients,
+      })
+    } else {
+      this.recipesService.addRecipe(
+          new Recipe(
+            Math.floor(Math.random() * 1000),
+            this.recipeForm.value.name,
+            this.recipeForm.value.description,
+            this.recipeForm.value.imagePath,
+            updatedIngredients
+          )
+      )
+    }
+    this.onCancel();
+  }
+
+  onCancel(): void {
+    this.router.navigate(['../'], { relativeTo: this.route })
   }
 }
