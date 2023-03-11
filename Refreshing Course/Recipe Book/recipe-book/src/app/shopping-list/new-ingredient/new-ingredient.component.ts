@@ -50,12 +50,12 @@ export class NewIngredientComponent implements OnInit, OnDestroy {
     this.clearForm(newIngredientForm);
   }
 
-  clearForm(newIngredientForm: NgForm): void {
-    newIngredientForm.reset();
-    this.editMode = false;
-  }
-
   ngOnDestroy(): void {
     this.selectedIngredientSubscription.unsubscribe();
+  }
+
+  private clearForm(newIngredientForm: NgForm): void {
+    newIngredientForm.reset();
+    this.editMode = false;
   }
 }

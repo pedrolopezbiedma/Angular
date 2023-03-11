@@ -10,21 +10,27 @@ import { Ingredient } from './ingredient.model';
 export class RecipesService {
   updatedRecipes = new Subject<Recipe[]>();
 
-  private recipes:Recipe[] = [
-    new Recipe(
-      Math.floor(Math.random() * 1000),
-      'Test Recipe 1 Name',
-      'Test Recipe 1 Description',
-      'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
-      [new Ingredient(Math.floor(Math.random() * 1000),'Pan', 5), new Ingredient(Math.floor(Math.random() * 1000), 'Mermelada', 1)]),
-    new Recipe(
-      Math.floor(Math.random() * 1000),
-      'Test Recipe 2 Name',
-      'Test Recipe 2 Description',
-      'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
-      [new Ingredient(Math.floor(Math.random() * 1000), 'Patatas', 5), new Ingredient(Math.floor(Math.random() * 1000), 'Huevo', 1)]
-      )
-  ];
+  // private recipes:Recipe[] = [
+  //   new Recipe(
+  //     Math.floor(Math.random() * 1000),
+  //     'Test Recipe 1 Name',
+  //     'Test Recipe 1 Description',
+  //     'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
+  //     [new Ingredient(Math.floor(Math.random() * 1000),'Pan', 5), new Ingredient(Math.floor(Math.random() * 1000), 'Mermelada', 1)]),
+  //   new Recipe(
+  //     Math.floor(Math.random() * 1000),
+  //     'Test Recipe 2 Name',
+  //     'Test Recipe 2 Description',
+  //     'https://i.blogs.es/173514/croquetas/450_1000.jpeg',
+  //     [new Ingredient(Math.floor(Math.random() * 1000), 'Patatas', 5), new Ingredient(Math.floor(Math.random() * 1000), 'Huevo', 1)]
+  //     )
+  // ];
+    private recipes: Recipe[] = [];
+
+  setRecipes(recipes: Recipe[]): void {
+    this.recipes = recipes;
+    this.updatedRecipes.next(this.recipes);
+  }
 
   getRecipes(): Recipe[] {
     return this.recipes.slice();

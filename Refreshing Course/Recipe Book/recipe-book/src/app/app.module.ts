@@ -19,6 +19,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { NewIngredientComponent } from './shopping-list/new-ingredient/new-ingredient.component';
 import { NoSelectedRecipeComponent } from './recipe-book/no-selected-recipe/no-selected-recipe.component';
 import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.compo
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
