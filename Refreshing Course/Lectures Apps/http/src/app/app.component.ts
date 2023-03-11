@@ -8,14 +8,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   loadedPosts = [];
+  endpoint = 'https://angular-course-project-bab02-default-rtdb.europe-west1.firebasedatabase.app/posts.json';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {}
 
   onCreatePost(postData: { title: string; content: string }) {
-    // Send Http request
     console.log(postData);
+    // Send Http request
+    this.http.post(this.endpoint, postData).subscribe((response) => {
+      console.log(response);
+    })
   }
 
   onFetchPosts() {
