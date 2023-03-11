@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+
 import { Post } from './Post.model';
+import { PostsService } from './posts.service';
 
 
 @Component({
@@ -12,10 +12,9 @@ import { Post } from './Post.model';
 export class AppComponent implements OnInit {
   isPending: boolean = false;
   loadedPosts: Post[] = [];
-  endpoint = 'https://angular-course-project-bab02-default-rtdb.europe-west1.firebasedatabase.app/posts.json';
 
   constructor(
-    private http: HttpClient
+    private postsService: PostsService
   ) {}
 
   ngOnInit() {
@@ -23,15 +22,10 @@ export class AppComponent implements OnInit {
   }
 
   onCreatePost(postData: { title: string; content: string }) {
-    console.log(postData);
-    // Send Http request
-    this.http.post<{ name: string }>(this.endpoint, postData).subscribe((response) => {
-      console.log(response);
-    })
+    this.postsService.createPost(new Post(postData.title, postData.content))
   }
 
   onFetchPosts() {
-    // Send Http request
     this.fetchPosts();
   }
 
@@ -39,21 +33,12 @@ export class AppComponent implements OnInit {
     // Send Http request
   }
 
-  private fetchPosts() {
+  private fetchPosts(): void {
     this.isPending = true;
-    this.http.get<{ [key : string]: Post }>(this.endpoint)
-      .pipe(
-        map(response => {
-          let postsArray = [];
-          for(const objectKey in response){
-            postsArray.push({ Id: objectKey, ...response[objectKey]} )
-          }
-          return postsArray
-        })
-      )
-      .subscribe((posts: Post[]) => {
-        this.loadedPosts = posts;
-        this.isPending = false;
-      })
+    this.postsService.fetchPosts().subscribe((posts: Post[]) => {
+      this.loadedPosts = posts;
+      this.isPending = false;
+    })
+
   }
 }
