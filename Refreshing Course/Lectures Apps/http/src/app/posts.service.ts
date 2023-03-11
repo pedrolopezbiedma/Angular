@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,8 @@ export class PostsService {
 
   fetchPosts(): Observable<Post[]> {
     return this.http.get<{ [key : string]: Post }>(this.endpoint, {
-      headers: new HttpHeaders({ 'Custom-Header': 'Hello' })
+      headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+      params: new HttpParams().set('print', 'pretty')
     })
       .pipe(
         map(response => {
@@ -27,7 +28,9 @@ export class PostsService {
   }
 
   createPost(newPost: Post): void {
-    this.http.post<{ name: string }>(this.endpoint, newPost).subscribe((response) => {
+    this.http.post<{ name: string }>(this.endpoint, newPost, {
+      observe: 'response'
+    }).subscribe((response) => {
       console.log(response);
     })
   }
