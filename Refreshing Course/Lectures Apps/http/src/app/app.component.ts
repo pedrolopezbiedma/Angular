@@ -10,7 +10,8 @@ import { Post } from './Post.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  isPending: boolean = false;
+  loadedPosts: Post[] = [];
   endpoint = 'https://angular-course-project-bab02-default-rtdb.europe-west1.firebasedatabase.app/posts.json';
 
   constructor(
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   private fetchPosts() {
+    this.isPending = true;
     this.http.get<{ [key : string]: Post }>(this.endpoint)
       .pipe(
         map(response => {
@@ -50,7 +52,8 @@ export class AppComponent implements OnInit {
         })
       )
       .subscribe((posts: Post[]) => {
-        console.log(posts)
+        this.loadedPosts = posts;
+        this.isPending = false;
       })
   }
 }
