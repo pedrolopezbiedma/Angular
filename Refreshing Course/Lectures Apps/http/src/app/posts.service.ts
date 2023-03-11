@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,7 +12,9 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   fetchPosts(): Observable<Post[]> {
-    return this.http.get<{ [key : string]: Post }>(this.endpoint)
+    return this.http.get<{ [key : string]: Post }>(this.endpoint, {
+      headers: new HttpHeaders({ 'Custom-Header': 'Hello' })
+    })
       .pipe(
         map(response => {
           let postsArray = [];
