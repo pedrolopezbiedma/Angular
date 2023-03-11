@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 
 // Components, Services & Models
 import { Recipe } from '../recipe-book/recipe.model';
-import { Ingredient } from './ingredient.model';
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {
