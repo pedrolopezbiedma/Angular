@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { Post } from './Post.model';
@@ -11,6 +12,7 @@ import { PostsService } from './posts.service';
 })
 export class AppComponent implements OnInit {
   isPending: boolean = false;
+  error: string = null;
   loadedPosts: Post[] = [];
 
   constructor(
@@ -41,7 +43,9 @@ export class AppComponent implements OnInit {
     this.postsService.fetchPosts().subscribe((posts: Post[]) => {
       this.loadedPosts = posts;
       this.isPending = false;
+    }, (error: HttpErrorResponse) => {
+      this.error = error.message;
+      this.isPending = false;
     })
-
   }
 }
