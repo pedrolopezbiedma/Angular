@@ -29,4 +29,8 @@ export class PostsService {
       console.log(response);
     })
   }
+
+  clearAllPosts(): Observable<any> {
+    return this.http.delete(this.endpoint);
+  }
 }
