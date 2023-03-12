@@ -20,7 +20,7 @@ export class AuthenticationResponse {
 export class AuthenticationService {
   signupEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
   loginEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
-  authenticatedUser: Subject<User>;
+  authenticatedUser: Subject<User> = new Subject();
 
   constructor(
     private http: HttpClient
@@ -40,6 +40,9 @@ export class AuthenticationService {
       }),
       catchError(errorResponse => {
         let error =  'An error has ocurred!';
+        if(!errorResponse.error || !errorResponse.error.error){
+          throwError(error);
+        }
         switch(errorResponse.error.error.message){
           case 'EMAIL_EXISTS':
             error = 'The email already exists!';
@@ -63,7 +66,11 @@ export class AuthenticationService {
         this.authenticatedUser.next(authenticatedUser);
       }),
       catchError(errorResponse => {
+        console.log(errorResponse);
         let error =  'An error has ocurred!';
+        if(!errorResponse.error || !errorResponse.error.error){
+          throwError(error);
+        }
         switch(errorResponse.error.error.message){
           case 'EMAIL_NOT_FOUND':
             error = 'The email is not correct!';

@@ -1,6 +1,7 @@
 // Angular
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 // Components, Services & Models
@@ -17,7 +18,8 @@ export class AuthenticationComponent {
   error: string = null;
 
   constructor(
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   onToggleMode(): void {
@@ -36,10 +38,11 @@ export class AuthenticationComponent {
     }
 
     authenticationObservable.subscribe(response => {
-      console.log(response)
+      console.log('Authentication ok response -->', response)
       this.isPending = false;
+      this.router.navigate(['recipe-book']);
     }, errorResponse => {
-      console.log(errorResponse);
+      console.log('Authentication error response -->', errorResponse)
       this.error = errorResponse;
       this.isPending = false;
     })
