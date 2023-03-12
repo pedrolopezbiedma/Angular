@@ -22,6 +22,7 @@ export class AuthenticationService {
   signupEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
   loginEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
   authenticatedUser: BehaviorSubject<User> = new BehaviorSubject(null);
+  autoLogoutReference;
 
   constructor(
     private http: HttpClient,
@@ -38,6 +39,7 @@ export class AuthenticationService {
       tap(response => {
         let expirationDate = new Date(new Date().getTime() + +response.expiresIn * 1000 );
         let authenticatedUser = new User(response.email, response.localId, response.idToken, expirationDate)
+        localStorage.setItem('authenticatedUser', JSON.stringify(authenticatedUser));
         this.authenticatedUser.next(authenticatedUser);
       }),
       catchError(errorResponse => {
@@ -65,6 +67,8 @@ export class AuthenticationService {
       tap(response => {
         let expirationDate = new Date(new Date().getTime() + +response.expiresIn * 1000 );
         let authenticatedUser = new User(response.email, response.localId, response.idToken, expirationDate)
+        localStorage.setItem('authenticatedUser', JSON.stringify(authenticatedUser));
+        this.autoLogout(+response.expiresIn * 1000);
         this.authenticatedUser.next(authenticatedUser);
       }),
       catchError(errorResponse => {
@@ -89,9 +93,32 @@ export class AuthenticationService {
     )
   }
 
-  logout() {
-    this.authenticatedUser.next(null);
-    this.router.navigate(['/authentication']);
+  autoLogin(): void {
+    const authenticatedUser = JSON.parse(localStorage.getItem('authenticatedUser'));
+    let expirationDate = new Date(authenticatedUser._tokenExpirationDate);
+    let user = new User(authenticatedUser.email, authenticatedUser.id, authenticatedUser._token, expirationDate);
+
+    if(!user.token){
+      return
+    }
+
+    const expirationDateTime = expirationDate.getTime() - new Date().getTime();
+    this.autoLogout(expirationDateTime);
+    this.authenticatedUser.next(user);
+
   }
 
+  logout() {
+    this.router.navigate(['/authentication']);
+    localStorage.removeItem('authenticatedUser');
+    clearTimeout(this.autoLogoutReference);
+    this.authenticatedUser.next(null);
+  }
+
+  autoLogout(expirationDate: number): void {
+    this.autoLogoutReference = setTimeout(() => {
+      this.logout();
+    }, expirationDate);
+
+  }
 }
