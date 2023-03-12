@@ -9,16 +9,17 @@ import { RecipeDetailsComponent } from './recipe-book/recipe-details/recipe-deta
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipeEditComponent } from './recipe-book/recipe-edit/recipe-edit.component';
 import { AuthenticationComponent } from './authentication/authentication/authentication.component';
+import { AuthGuard } from './authentication/authentication/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipe-book', pathMatch: 'full' },
-  { path: 'recipe-book', component: RecipeBookComponent, children: [
+  { path: 'recipe-book', component: RecipeBookComponent, canActivate: [AuthGuard], children: [
     { path: '', component: NoSelectedRecipeComponent },
     { path: 'new', component: RecipeEditComponent },
     { path: ':recipeId', component: RecipeDetailsComponent },
     { path: ':recipeId/edit', component: RecipeEditComponent },
   ]},
-  { path: 'shopping-list', component: ShoppingListComponent },
+  { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] },
   { path: 'authentication', component: AuthenticationComponent }
 ]
 

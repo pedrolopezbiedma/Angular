@@ -95,13 +95,13 @@ export class AuthenticationService {
 
   autoLogin(): void {
     const authenticatedUser = JSON.parse(localStorage.getItem('authenticatedUser'));
-    let expirationDate = new Date(authenticatedUser._tokenExpirationDate);
-    let user = new User(authenticatedUser.email, authenticatedUser.id, authenticatedUser._token, expirationDate);
 
-    if(!user.token){
+    if(!authenticatedUser) {
       return
     }
 
+    let expirationDate = new Date(authenticatedUser._tokenExpirationDate);
+    let user = new User(authenticatedUser.email, authenticatedUser.id, authenticatedUser._token, expirationDate);
     const expirationDateTime = expirationDate.getTime() - new Date().getTime();
     this.autoLogout(expirationDateTime);
     this.authenticatedUser.next(user);
