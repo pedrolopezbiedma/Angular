@@ -3,7 +3,7 @@
     <div *ngIf="error">
       <p class="alert alert-danger">{{ error }}</p>
     </div>
-    <div>
+    <div style="text-align: center;">
       <app-loading-spinner *ngIf="isPending"></app-loading-spinner>
     </div>
     <form *ngIf="!isPending" #authenticationForm="ngForm" (submit)="onSubmit(authenticationForm)">

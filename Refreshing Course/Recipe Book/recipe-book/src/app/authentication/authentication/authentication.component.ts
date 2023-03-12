@@ -1,9 +1,10 @@
 // Angular
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 // Components, Services & Models
-import { AuthenticationService } from 'src/app/shared/authentication.service';
+import { AuthenticationResponse, AuthenticationService } from 'src/app/shared/authentication.service';
 
 @Component({
   selector: 'app-authentication',
@@ -24,20 +25,25 @@ export class AuthenticationComponent {
   }
 
   onSubmit(authenticationForm: NgForm){
+    this.isPending = true;
+    let authenticationObservable: Observable<AuthenticationResponse>;
+
     console.log(authenticationForm.value)
     if(this.loginMode){
-      // Login the user
+      authenticationObservable = this.authenticationService.login(authenticationForm.value.email, authenticationForm.value.password)
     } else {
-      this.authenticationService.signup(authenticationForm.value.email, authenticationForm.value.password)
-        .subscribe(response => {
-          console.log(response)
-          this.isPending = false;
-        }, error => {
-          console.log(error);
-          this.error = 'An error has ocurred!';
-          this.isPending = false;
-        })
+      authenticationObservable = this.authenticationService.signup(authenticationForm.value.email, authenticationForm.value.password)
     }
+
+    authenticationObservable.subscribe(response => {
+      console.log(response)
+      this.isPending = false;
+    }, errorResponse => {
+      console.log(errorResponse);
+      this.error = errorResponse;
+      this.isPending = false;
+    })
+
     authenticationForm.reset();
   }
 }
