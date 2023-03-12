@@ -1,7 +1,11 @@
 // Angular
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+
+// Components, Services & Models
+import { User } from './user.model';
 
 export class AuthenticationResponse {
   idToken: string;
@@ -9,12 +13,14 @@ export class AuthenticationResponse {
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered?: boolean;
 }
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
   signupEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
   loginEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
+  authenticatedUser: Subject<User>;
 
   constructor(
     private http: HttpClient
@@ -26,15 +32,22 @@ export class AuthenticationService {
       password: password,
       returnSecureToken: true
     })
-    .pipe(catchError(errorResponse => {
-      let error =  'An error has ocurred!';
-      switch(errorResponse.error.error.message){
-        case 'EMAIL_EXISTS':
-          error = 'The email already exists!';
-          break;
-      }
-      return throwError(error);
-    }))
+    .pipe(
+      tap(response => {
+        let expirationDate = new Date(new Date().getTime() + +response.expiresIn * 1000 );
+        let authenticatedUser = new User(response.email, response.localId, response.idToken, expirationDate)
+        this.authenticatedUser.next(authenticatedUser);
+      }),
+      catchError(errorResponse => {
+        let error =  'An error has ocurred!';
+        switch(errorResponse.error.error.message){
+          case 'EMAIL_EXISTS':
+            error = 'The email already exists!';
+            break;
+        }
+        return throwError(error);
+      })
+    )
   }
 
   login(email: string, password: string): Observable<AuthenticationResponse> {
@@ -43,21 +56,28 @@ export class AuthenticationService {
       password: password,
       returnSecureToken: true
     })
-    .pipe(catchError(errorResponse => {
-      let error =  'An error has ocurred!';
-      switch(errorResponse.error.error.message){
-        case 'EMAIL_NOT_FOUND':
-          error = 'The email is not correct!';
-          break;
-        case 'INVALID_PASSWORD':
-          error = 'The password is not correct!';
-          break;
-        case 'USER_DISABLED':
-          error = 'The user is disabled!';
-          break;
-      }
-      return throwError(error);
-    }))
+    .pipe(
+      tap(response => {
+        let expirationDate = new Date(new Date().getTime() + +response.expiresIn * 1000 );
+        let authenticatedUser = new User(response.email, response.localId, response.idToken, expirationDate)
+        this.authenticatedUser.next(authenticatedUser);
+      }),
+      catchError(errorResponse => {
+        let error =  'An error has ocurred!';
+        switch(errorResponse.error.error.message){
+          case 'EMAIL_NOT_FOUND':
+            error = 'The email is not correct!';
+            break;
+          case 'INVALID_PASSWORD':
+            error = 'The password is not correct!';
+            break;
+          case 'USER_DISABLED':
+            error = 'The user is disabled!';
+            break;
+        }
+        return throwError(error);
+      })
+    )
   }
 
 }
