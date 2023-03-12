@@ -21,9 +21,13 @@ export class NavbarComponent {
   ngOnInit() {
     this.authenticationService.authenticatedUser
       .subscribe(authenticatedUser => {
-        this.userAuthenticated = authenticatedUser.token === null ? false : true;
+        this.userAuthenticated = authenticatedUser && authenticatedUser?.token !== null ? true : false;
         console.log('userIsAuthenticated -->', this.userAuthenticated);
       })
+  }
+
+  onLogout(): void {
+    this.authenticationService.logout();
   }
 
   onFetchData(): void {

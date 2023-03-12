@@ -1,7 +1,8 @@
 // Angular
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 // Components, Services & Models
@@ -20,10 +21,11 @@ export class AuthenticationResponse {
 export class AuthenticationService {
   signupEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
   loginEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
-  authenticatedUser: Subject<User> = new Subject();
+  authenticatedUser: BehaviorSubject<User> = new BehaviorSubject(null);
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   signup(email: string, password: string): Observable<AuthenticationResponse> {
@@ -85,6 +87,11 @@ export class AuthenticationService {
         return throwError(error);
       })
     )
+  }
+
+  logout() {
+    this.authenticatedUser.next(null);
+    this.router.navigate(['/authentication']);
   }
 
 }
