@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 // Components, Services & Models
-import { Recipe } from '../recipe-book/recipe.model';
+import { Recipe } from '../../recipe-book/recipe.model';
 
 @Injectable({providedIn: 'root'})
 export class RecipesService {

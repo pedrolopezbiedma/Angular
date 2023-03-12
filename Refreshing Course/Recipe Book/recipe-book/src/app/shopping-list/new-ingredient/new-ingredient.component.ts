@@ -4,8 +4,8 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 // Components & Models
-import { ShoppingListService } from 'src/app/shared/shopping-list.service';
-import { Ingredient } from 'src/app/shared/ingredient.model';
+import { ShoppingListService } from 'src/app/shared/services/shopping-list.service';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
 
 @Component({
   selector: 'app-new-ingredient',

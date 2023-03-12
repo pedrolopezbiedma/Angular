@@ -3,8 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Components, Services & Models
-import { ShoppingListService } from '../shared/shopping-list.service';
-import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shared/services/shopping-list.service';
+import { Ingredient } from '../shared/models/ingredient.model';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',

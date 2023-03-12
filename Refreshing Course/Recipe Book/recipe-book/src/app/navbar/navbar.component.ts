@@ -1,9 +1,9 @@
 // Angular
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../shared/authentication.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 // Components, Services & Models
-import { DatabaseService } from '../shared/database.service';
+import { DatabaseService } from '../shared/services/database.service';
 
 @Component({
   selector: 'app-navbar',

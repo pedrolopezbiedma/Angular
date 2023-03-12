@@ -1,10 +1,10 @@
 // Angular
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { RecipesService } from 'src/app/shared/recipes.service';
+import { RecipesService } from 'src/app/shared/services/recipes.service';
 
 // Components, Services & Models
-import { ShoppingListService } from '../../shared/shopping-list.service'
+import { ShoppingListService } from '../../shared/services/shopping-list.service'
 import { Recipe } from '../recipe.model';
 
 @Component({

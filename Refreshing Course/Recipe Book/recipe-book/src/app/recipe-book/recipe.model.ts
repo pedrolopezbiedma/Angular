@@ -1,5 +1,5 @@
 // Components, Services & Models
-import { Ingredient } from "../shared/ingredient.model";
+import { Ingredient } from "../shared/models/ingredient.model";
 
 export class Recipe {
   public recipeId: number;

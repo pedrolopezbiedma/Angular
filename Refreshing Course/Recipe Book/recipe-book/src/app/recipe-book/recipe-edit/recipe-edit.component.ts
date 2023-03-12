@@ -4,8 +4,8 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // Components, Services & Models
-import { RecipesService } from 'src/app/shared/recipes.service';
-import { Ingredient } from 'src/app/shared/ingredient.model';
+import { RecipesService } from 'src/app/shared/services/recipes.service';
+import { Ingredient } from 'src/app/shared/models/ingredient.model';
 import { Recipe } from '../recipe.model';
 
 @Component({

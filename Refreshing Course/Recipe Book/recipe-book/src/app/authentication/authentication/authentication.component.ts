@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 // Components, Services & Models
-import { AuthenticationResponse, AuthenticationService } from 'src/app/shared/authentication.service';
+import { AuthenticationResponse, AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-authentication',

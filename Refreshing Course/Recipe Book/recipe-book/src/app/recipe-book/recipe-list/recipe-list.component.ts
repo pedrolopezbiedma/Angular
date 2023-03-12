@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Component, Services & Model
-import { RecipesService } from 'src/app/shared/recipes.service';
+import { RecipesService } from 'src/app/shared/services/recipes.service';
 import { Recipe } from '../recipe.model';
 
 @Component({

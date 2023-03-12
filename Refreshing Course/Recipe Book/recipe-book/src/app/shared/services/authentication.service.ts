@@ -6,7 +6,7 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 // Components, Services & Models
-import { User } from './user.model';
+import { User } from '../models/user.model';
 
 export class AuthenticationResponse {
   idToken: string;

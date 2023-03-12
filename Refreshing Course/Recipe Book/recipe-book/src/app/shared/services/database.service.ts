@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 // Components, Services & Models
 import { RecipesService } from './recipes.service';
-import { Recipe } from '../recipe-book/recipe.model';
+import { Recipe } from '../../recipe-book/recipe.model';
 import { map, take } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 

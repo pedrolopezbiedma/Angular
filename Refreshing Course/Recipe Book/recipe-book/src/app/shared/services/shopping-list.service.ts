@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 // Components, Services & Models
-import { Ingredient } from './ingredient.model';
+import { Ingredient } from '../models/ingredient.model';
 
 @Injectable({providedIn: 'root'})
 export class ShoppingListService {
