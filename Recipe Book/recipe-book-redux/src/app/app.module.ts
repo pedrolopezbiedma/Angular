@@ -21,8 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     NavbarComponent,
   ],
   imports: [
-    BrowserModule,
     StoreModule.forRoot({ shoppingListReducer: ShoppingListReducer}),
+    BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     SharedModule
