@@ -1,7 +1,11 @@
 // Angular
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
+// Routing
+import { RecipeBookRoutingModule } from './recipe-book-routing.module';
 
 // Components, Services & Models
 import { NoSelectedRecipeComponent } from './no-selected-recipe/no-selected-recipe.component';
@@ -21,9 +25,11 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
     RecipeEditComponent
   ],
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    RecipeBookRoutingModule
   ],
   exports: [
     RecipeBookComponent,

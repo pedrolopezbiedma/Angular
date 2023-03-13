@@ -4,7 +4,7 @@
 
 This is my playground to learn Angular. In it, you can find several projects with different purposes. The content of this repository has been coded while following this [Udemy Course](https://www.udemy.com/course/the-complete-guide-to-angular-2/) about Angular
 
-## Conten Table
+## Content Table
 
 ---
 
