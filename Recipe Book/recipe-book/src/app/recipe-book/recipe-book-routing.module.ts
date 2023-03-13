@@ -12,8 +12,7 @@ import { AuthGuard } from '../authentication/authentication/auth.guard';
 // Components, Services & Models
 
 const routes: Routes = [
-  { path: '', redirectTo: '/recipe-book', pathMatch: 'full' },
-  { path: 'recipe-book', component: RecipeBookComponent, canActivate: [AuthGuard], children: [
+  { path: '', component: RecipeBookComponent, canActivate: [AuthGuard], children: [
     { path: '', component: NoSelectedRecipeComponent },
     { path: 'new', component: RecipeEditComponent },
     { path: ':recipeId', component: RecipeDetailsComponent },

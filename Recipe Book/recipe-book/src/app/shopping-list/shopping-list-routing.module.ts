@@ -7,7 +7,7 @@ import { AuthGuard } from '../authentication/authentication/auth.guard';
 import { ShoppingListComponent } from './shopping-list.component';
 
 const routes: Routes = [
-  { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] },
+  { path: '', component: ShoppingListComponent, canActivate: [AuthGuard] },
 ]
 
 @NgModule({
