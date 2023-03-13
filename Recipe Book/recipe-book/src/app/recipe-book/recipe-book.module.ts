@@ -30,14 +30,6 @@ import { RecipeListComponent } from './recipe-list/recipe-list.component';
     ReactiveFormsModule,
     RouterModule,
     RecipeBookRoutingModule
-  ],
-  exports: [
-    RecipeBookComponent,
-    RecipeListComponent,
-    RecipeItemComponent,
-    NoSelectedRecipeComponent,
-    RecipeDetailsComponent,
-    RecipeEditComponent
   ]
 })
 export class RecipeBookModule { }
