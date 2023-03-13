@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// Components, Services & Models
 import { DropdownDirective } from './dropdown.directive';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner/loading-spinner.component';
 

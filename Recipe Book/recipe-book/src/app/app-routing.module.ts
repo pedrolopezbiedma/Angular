@@ -6,8 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication/authentication.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/recipe-book', pathMatch: 'full' },
-  { path: 'authentication', component: AuthenticationComponent }
+  { path: '', redirectTo: '/recipe-book', pathMatch: 'full' }
 ]
 
 @NgModule({
