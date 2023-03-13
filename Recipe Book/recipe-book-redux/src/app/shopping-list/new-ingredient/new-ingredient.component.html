@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form #newIngredientForm="ngForm" (submit)="onSubmitIngredient(newIngredientForm)">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <input
+            class="form-control"
+            type="text"
+            id="name"
+            name="name"
+            [(ngModel)]="name"
+            required #nameInput="ngModel"
+          />
+          <p class="help-block" *ngIf="!nameInput.valid && nameInput.touched">The name is not correct!</p>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="amount">Amount</label>
+          <input
+            class="form-control"
+            type="number"
+            id="amount"
+            name="amount"
+            [(ngModel)]="amount"
+            required min="1" #amountInput="ngModel"
+          />
+          <p class="help-block" *ngIf="!amountInput.valid && amountInput.touched">The amount is not correct!</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!newIngredientForm.valid"> {{ editMode ? 'Edit' : 'Add' }} </button>
+          <button *ngIf="editMode" class="btn btn-danger" type="button" (click)="onDeleteIngredient(newIngredientForm)">Delete</button>
+          <button class="btn btn-primary" type="button" (click)="onClearForm(newIngredientForm)">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
