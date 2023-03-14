@@ -3,6 +3,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+// NgRx
+import { Store } from '@ngrx/store';
+import { AddIngredientAction } from '../store/shopping-list.actions';
+
 // Components & Models
 import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
 import { Ingredient } from 'src/app/shared/models/ingredient.model';
@@ -20,7 +24,8 @@ export class NewIngredientComponent implements OnInit, OnDestroy {
   amount: number;
 
   constructor(
-    private shoppingListService: ShoppingListService
+    private shoppingListService: ShoppingListService,
+    private store: Store<{ shoppingListReducer: { ingredients: Ingredient[]} }>
   ){}
 
   ngOnInit(): void {
@@ -36,7 +41,8 @@ export class NewIngredientComponent implements OnInit, OnDestroy {
     if(this.editMode){
       this.shoppingListService.editIngredient(new Ingredient(this.ingredientId, newIngredientForm.value.name, newIngredientForm.value.amount));
     } else {
-      this.shoppingListService.addIngredient(new Ingredient(Math.floor(Math.random() * 1000), newIngredientForm.value.name, newIngredientForm.value.amount));
+      // this.shoppingListService.addIngredient(new Ingredient(Math.floor(Math.random() * 1000), newIngredientForm.value.name, newIngredientForm.value.amount));
+      this.store.dispatch(new AddIngredientAction(new Ingredient(Math.floor(Math.random() * 1000), newIngredientForm.value.name, newIngredientForm.value.amount)));
     }
     this.clearForm(newIngredientForm);
   }
