@@ -28,7 +28,7 @@ export function ShoppingListReducer(state: ShoppingListState = initialState, act
     case ShoppingListActions.ADD_INGREDIENT:
       return { 
         ...state,
-        ingtredients:  [...state.ingredients, action.payload ]
+        ingredients:  [...state.ingredients, action.payload ]
       };
 
     case ShoppingListActions.ADD_INGREDIENTS:
@@ -62,6 +62,18 @@ export function ShoppingListReducer(state: ShoppingListState = initialState, act
       return {
         ...state,
         ingredients: updatedIngredients
+      }
+
+    case ShoppingListActions.START_EDIT_INGREDIENT:
+      return {
+        ...state,
+        editedIngredient: { ...action.payload }
+      }
+
+    case ShoppingListActions.STOP_EDIT_INGREDIENT:
+      return {
+        ...state,
+        editedIngredient: null
       }
 
     default:

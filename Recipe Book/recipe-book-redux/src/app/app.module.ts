@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // NgRx
 import { StoreModule } from '@ngrx/store';
-import { ShoppingListReducer } from './shopping-list/store/shopping-list-reducer';
+import { ShoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 
 // Other Modules
 import { AppRoutingModule } from './app-routing.module';
