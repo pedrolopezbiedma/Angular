@@ -5,6 +5,12 @@ import { Router } from '@angular/router';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
+// NgRx
+import { Store } from '@ngrx/store';
+import * as fromAppReducer from '../store/app.reducer';
+import * as fromAuthenticationActions from '../authentication/store/authentication.actions';
+
+
 // Components, Services & Models
 import { User } from '../shared/models/user.model';
 
@@ -21,12 +27,13 @@ export class AuthenticationResponse {
 export class AuthenticationService {
   signupEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
   loginEndpoint: string = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB2wybfjsm-j8KBd98_UjS9mHMfGlfOV80';
-  authenticatedUser: BehaviorSubject<User> = new BehaviorSubject(null);
+  // authenticatedUser: BehaviorSubject<User> = new BehaviorSubject(null);
   autoLogoutReference;
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private store: Store<fromAppReducer.AppState>
   ) { }
 
   signup(email: string, password: string): Observable<AuthenticationResponse> {
@@ -40,7 +47,8 @@ export class AuthenticationService {
         let expirationDate = new Date(new Date().getTime() + +response.expiresIn * 1000 );
         let authenticatedUser = new User(response.email, response.localId, response.idToken, expirationDate)
         localStorage.setItem('authenticatedUser', JSON.stringify(authenticatedUser));
-        this.authenticatedUser.next(authenticatedUser);
+        // this.authenticatedUser.next(authenticatedUser);
+        this.store.dispatch(new fromAuthenticationActions.LoginAction(authenticatedUser));
       }),
       catchError(errorResponse => {
         let error =  'An error has ocurred!';
@@ -69,7 +77,8 @@ export class AuthenticationService {
         let authenticatedUser = new User(response.email, response.localId, response.idToken, expirationDate)
         localStorage.setItem('authenticatedUser', JSON.stringify(authenticatedUser));
         this.autoLogout(+response.expiresIn * 1000);
-        this.authenticatedUser.next(authenticatedUser);
+        // this.authenticatedUser.next(authenticatedUser);
+        this.store.dispatch(new fromAuthenticationActions.LoginAction(authenticatedUser));
       }),
       catchError(errorResponse => {
         console.log(errorResponse);
@@ -104,7 +113,8 @@ export class AuthenticationService {
     let user = new User(authenticatedUser.email, authenticatedUser.id, authenticatedUser._token, expirationDate);
     const expirationDateTime = expirationDate.getTime() - new Date().getTime();
     this.autoLogout(expirationDateTime);
-    this.authenticatedUser.next(user);
+    // this.authenticatedUser.next(user);
+    this.store.dispatch(new fromAuthenticationActions.LoginAction(user));
 
   }
 
@@ -112,7 +122,8 @@ export class AuthenticationService {
     this.router.navigate(['/authentication']);
     localStorage.removeItem('authenticatedUser');
     clearTimeout(this.autoLogoutReference);
-    this.authenticatedUser.next(null);
+    // this.authenticatedUser.next(null);
+    this.store.dispatch(new fromAuthenticationActions.LogoutAction());
   }
 
   autoLogout(expirationDate: number): void {

@@ -1,3 +1,5 @@
+import * as AuthenticationActions from './authentication.actions'
+
 import { User } from "src/app/shared/models/user.model";
 
 // State Interface
@@ -11,6 +13,21 @@ const initialState: AuthenticationState = {
 }
 
 // Reducer
-export function AuthenticationReducer( state: AuthenticationState = initialState, action){
-  return state;
+export function AuthenticationReducer( state: AuthenticationState = initialState, action: AuthenticationActions.AuthenticationActionsType){
+  switch (action.type) {
+    case AuthenticationActions.LOGIN:
+      return {
+        ...state,
+        user: action.payload
+      }
+
+    case AuthenticationActions.LOGOUT:
+      return {
+        ...state,
+        user: null
+      }
+
+    default:
+      return state;
+  }
 }
