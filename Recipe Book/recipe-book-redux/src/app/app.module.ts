@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // NgRx
 import { StoreModule } from '@ngrx/store';
-import { ShoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import * as fromAppReducer from './store/app.reducer'
 
 // Other Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     NavbarComponent,
   ],
   imports: [
-    StoreModule.forRoot({ shoppingListReducer: ShoppingListReducer}),
+    StoreModule.forRoot(fromAppReducer.AppReducer),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

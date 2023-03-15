@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 
 // NgRx
 import { Store } from '@ngrx/store';
-import * as ShoppingListReducer from '../store/shopping-list.reducer'
+import * as fromAppReducer from '../../store/app.reducer'
 import * as ShoppingListActions from '../store/shopping-list.actions'
 
 // Components & Models
@@ -24,11 +24,11 @@ export class NewIngredientComponent implements OnInit, OnDestroy {
   amount: number;
 
   constructor(
-    private store: Store<ShoppingListReducer.AppState>
+    private store: Store<fromAppReducer.AppState>
   ){}
 
   ngOnInit(): void {
-   this.selectedIngredientSubscription = this.store.select('shoppingListReducer').subscribe(stateData => {
+   this.selectedIngredientSubscription = this.store.select('shoppingList').subscribe(stateData => {
       if(stateData.editedIngredient){
         this.editMode = true;
         this.ingredientId = stateData.editedIngredient.ingredientId;

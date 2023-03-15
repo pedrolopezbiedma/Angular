@@ -4,8 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // NgRx
 import { Store } from '@ngrx/store';
+import * as fromAppReducer from '../../store/app.reducer'
 import * as shoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import * as shoppingListReducer from '../../shopping-list/store/shopping-list.reducer';
 
 // Components, Services & Models
 import { RecipesService } from 'src/app/recipe-book/recipes.service';
@@ -23,7 +23,7 @@ export class RecipeDetailsComponent {
     private route: ActivatedRoute,
     private router:Router,
     private recipesService: RecipesService,
-    private store: Store<shoppingListReducer.AppState>
+    private store: Store<fromAppReducer.AppState>
   ){}
 
   ngOnInit() {

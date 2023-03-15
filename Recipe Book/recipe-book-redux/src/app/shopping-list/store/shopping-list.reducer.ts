@@ -4,10 +4,7 @@ import * as ShoppingListActions from './shopping-list.actions';
 // Model
 import { Ingredient } from '../../shared/models/ingredient.model';
 
-export interface AppState {
-  shoppingListReducer: ShoppingListState;
-}
-
+// State Interface
 export interface ShoppingListState {
   ingredients: Ingredient[];
   editedIngredient: Ingredient;

@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 // NgRx
 import { Store } from '@ngrx/store';
+import * as fromAppReducer from '../store/app.reducer'
 import * as ShoppingListActions from './store/shopping-list.actions';
-import * as ShoppingListReducer from './store/shopping-list.reducer';
 
 // Components, Services & Models
 import { Ingredient } from '../shared/models/ingredient.model';
@@ -19,11 +19,11 @@ export class ShoppingListComponent implements OnInit {
   ingredients: Observable<{ ingredients: Ingredient[] }>;
 
   constructor(
-    private store: Store<ShoppingListReducer.AppState>
+    private store: Store<fromAppReducer.AppState>
   ){}
 
   ngOnInit(){
-    this.ingredients = this.store.select('shoppingListReducer');
+    this.ingredients = this.store.select('shoppingList');
   }
 
   onSelectedShoppingListItem(ingredient: Ingredient): void {
