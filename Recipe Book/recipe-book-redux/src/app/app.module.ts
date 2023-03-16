@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 // Components, Services & Models
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [

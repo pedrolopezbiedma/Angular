@@ -1,5 +1,8 @@
-import * as AuthenticationActions from './authentication.actions'
+// NgRx
+import { Action, createReducer, on } from "@ngrx/store";
+import * as AuthenticationActions from './authentication.actions';
 
+// Components, Services & Models
 import { User } from "src/app/shared/models/user.model";
 
 // State Interface
@@ -12,22 +15,18 @@ const initialState: AuthenticationState = {
   user: null
 }
 
-// Reducer
-export function AuthenticationReducer( state: AuthenticationState = initialState, action: AuthenticationActions.AuthenticationActionsType){
-  switch (action.type) {
-    case AuthenticationActions.LOGIN:
-      return {
-        ...state,
-        user: action.payload
-      }
+const _authenticationReducer = createReducer(
+  initialState,
 
-    case AuthenticationActions.LOGOUT:
-      return {
-        ...state,
-        user: null
-      }
+  on(AuthenticationActions.loginSuccessAction, (state, action) => {
+    return {
+      ...state,
+      user: action.user
+    }
+  }),
 
-    default:
-      return state;
-  }
+);
+
+export function AuthenticationReducer(state: AuthenticationState, action: Action) {
+  return _authenticationReducer(state, action);
 }

@@ -25,11 +25,11 @@ export class NewIngredientComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<fromAppReducer.AppState>
-  ){}
+  ) { }
 
   ngOnInit(): void {
-   this.selectedIngredientSubscription = this.store.select('shoppingList').subscribe(stateData => {
-      if(stateData.editedIngredient){
+    this.selectedIngredientSubscription = this.store.select('shoppingList').subscribe(stateData => {
+      if (stateData.editedIngredient) {
         this.editMode = true;
         this.ingredientId = stateData.editedIngredient.ingredientId;
         this.name = stateData.editedIngredient.name;
@@ -39,16 +39,19 @@ export class NewIngredientComponent implements OnInit, OnDestroy {
   }
 
   onSubmitIngredient(newIngredientForm: NgForm): void {
-    if(this.editMode){
-      this.store.dispatch(new ShoppingListActions.EditIngredientAction(new Ingredient(this.ingredientId, newIngredientForm.value.name, newIngredientForm.value.amount)));
+    if (this.editMode) {
+      // this.store.dispatch(new ShoppingListActions.EditIngredientAction(new Ingredient(this.ingredientId, newIngredientForm.value.name, newIngredientForm.value.amount)));
+      this.store.dispatch(ShoppingListActions.editIngredientAction({ ingredient: new Ingredient(this.ingredientId, newIngredientForm.value.name, newIngredientForm.value.amount) }))
     } else {
-      this.store.dispatch(new ShoppingListActions.AddIngredientAction(new Ingredient(Math.floor(Math.random() * 1000), newIngredientForm.value.name, newIngredientForm.value.amount)));
+      // this.store.dispatch(new ShoppingListActions.AddIngredientAction(new Ingredient(Math.floor(Math.random() * 1000), newIngredientForm.value.name, newIngredientForm.value.amount)));
+      this.store.dispatch(ShoppingListActions.addIngredientAction({ ingredient: new Ingredient(Math.floor(Math.random() * 1000), newIngredientForm.value.name, newIngredientForm.value.amount) }))
     }
     this.clearForm(newIngredientForm);
   }
 
   onDeleteIngredient(newIngredientForm: NgForm): void {
-    this.store.dispatch(new ShoppingListActions.RemoveIngredientAction(new Ingredient(this.ingredientId, this.name, this.amount)));
+    // this.store.dispatch(new ShoppingListActions.RemoveIngredientAction(new Ingredient(this.ingredientId, this.name, this.amount)));
+    this.store.dispatch(ShoppingListActions.removeIngredientAction({ ingredient: new Ingredient(this.ingredientId, this.name, this.amount) }));
     this.clearForm(newIngredientForm);
   }
 
@@ -57,13 +60,15 @@ export class NewIngredientComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.store.dispatch(new ShoppingListActions.StopEditIngredientAction());
+    // this.store.dispatch(new ShoppingListActions.StopEditIngredientAction());
+    this.store.dispatch(ShoppingListActions.stopEditIngredientAction());
     this.selectedIngredientSubscription.unsubscribe();
   }
 
   private clearForm(newIngredientForm: NgForm): void {
     newIngredientForm.reset();
-    this.store.dispatch(new ShoppingListActions.StopEditIngredientAction());
+    // this.store.dispatch(new ShoppingListActions.StopEditIngredientAction());
+    this.store.dispatch(ShoppingListActions.stopEditIngredientAction());
     this.editMode = false;
   }
 }

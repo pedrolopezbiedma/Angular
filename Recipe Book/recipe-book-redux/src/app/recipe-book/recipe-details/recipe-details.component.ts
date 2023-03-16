@@ -21,10 +21,10 @@ export class RecipeDetailsComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private recipesService: RecipesService,
     private store: Store<fromAppReducer.AppState>
-  ){}
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((routeParams: Params) => {
@@ -33,7 +33,8 @@ export class RecipeDetailsComponent {
   }
 
   onToShoppingList(): void {
-    this.store.dispatch(new shoppingListActions.AddIngredientsAction(this.recipe.ingredients));
+    // this.store.dispatch(new shoppingListActions.AddIngredientsAction(this.recipe.ingredients));
+    this.store.dispatch(shoppingListActions.addIngredientsAction({ ingredients: this.recipe.ingredients }))
   }
 
   onEditRecipe(): void {

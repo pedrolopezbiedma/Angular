@@ -20,13 +20,14 @@ export class ShoppingListComponent implements OnInit {
 
   constructor(
     private store: Store<fromAppReducer.AppState>
-  ){}
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.ingredients = this.store.select('shoppingList');
   }
 
   onSelectedShoppingListItem(ingredient: Ingredient): void {
-    this.store.dispatch(new ShoppingListActions.StartEditIngredientAction(ingredient));
+    // this.store.dispatch(new ShoppingListActions.StartEditIngredientAction(ingredient));
+    this.store.dispatch(ShoppingListActions.startEditIngredientAction({ ingredient: ingredient }));
   }
 }

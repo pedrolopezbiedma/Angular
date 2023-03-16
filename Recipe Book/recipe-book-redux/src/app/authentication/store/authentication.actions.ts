@@ -1,23 +1,22 @@
-import { Action } from "@ngrx/store";
-import { User } from "src/app/shared/models/user.model";
+import { createAction, props } from '@ngrx/store';
+import { User } from 'src/app/shared/models/user.model';
 
-export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const loginStartAction = createAction(
+  '[Authentication] LOGIN_START',
+  props<{ email: string, password: string }>()
+)
 
-export const LOGIN = '[Authentication] LOGIN';
-export const LOGOUT = ' [Authentication] LOGOUT';
+export const loginSuccessAction = createAction(
+  '[Authentication] LOGIN_SUCCESS',
+  props<{ user: User }>()
+)
 
-export class LoginAction implements Action {
-  readonly type = LOGIN;
+export const loginErrorAction = createAction(
+  '[Authentication] LOGIN_SUCCESS',
+  props<{ errorMessage: string }>()
+)
 
-  constructor(public payload: User) {};
-}
+export const logoutAction = createAction(
+  '[Authentication] LOGOUT'
+)
 
-export class LogoutAction implements Action {
-  readonly type = LOGOUT;
-
-  constructor(){};
-}
-
-  export type AuthenticationActionsType =
-  LoginAction |
-  LogoutAction;
