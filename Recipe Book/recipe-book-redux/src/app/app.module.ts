@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 // NgRx
 import { StoreModule } from '@ngrx/store';
 import * as fromAppReducer from './store/app.reducer'
+import { AuthenticationEffects } from './authentication/store/authentication.effects';
 
 // Other Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
   ],
   imports: [
     StoreModule.forRoot(fromAppReducer.AppReducer),
+    EffectsModule.forRoot([AuthenticationEffects]),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
