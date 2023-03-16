@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import * as fromAppReducer from './store/app.reducer'
 import { AuthenticationEffects } from './authentication/store/authentication.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 // Other Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +26,7 @@ import { EffectsModule } from '@ngrx/effects';
   imports: [
     StoreModule.forRoot(fromAppReducer.AppReducer),
     EffectsModule.forRoot([AuthenticationEffects]),
+    StoreDevtoolsModule.instrument(),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
