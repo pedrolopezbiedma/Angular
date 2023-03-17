@@ -7,9 +7,10 @@ import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as fromAppReducer from '../store/app.reducer';
 import * as AuthenticationActions from '../authentication/store/authentication.actions'
+import * as RecipeBookActions from '../recipe-book/store/recipe-book.actions'
 
 // Components, Services & Models
-import { DatabaseService } from '../shared/services/database.service';
+import { User } from '../shared/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -18,10 +19,10 @@ import { DatabaseService } from '../shared/services/database.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   authenticationStateSubscription: Subscription;
+  user: User;
   userAuthenticated: boolean = false;
 
   constructor(
-    private databaseService: DatabaseService,
     private store: Store<fromAppReducer.AppState>
   ) { }
 
@@ -32,6 +33,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
           return authenticationState.user
         })
       ).subscribe(authenticatedUser => {
+        this.user = authenticatedUser;
         this.userAuthenticated = authenticatedUser && authenticatedUser?.token !== null ? true : false;
         console.log('userIsAuthenticated -->', this.userAuthenticated);
       })
@@ -42,11 +44,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   onFetchData(): void {
-    this.databaseService.fetchRecipes();
+    this.store.dispatch(RecipeBookActions.fetchRecipes({ user: this.user }))
   }
 
   onSaveData(): void {
-    this.databaseService.storeRecipces();
+    this.store.dispatch(RecipeBookActions.storeRecipes({ user: this.user }))
   }
 
   ngOnDestroy(): void {

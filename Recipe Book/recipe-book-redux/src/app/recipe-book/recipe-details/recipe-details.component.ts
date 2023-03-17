@@ -1,39 +1,51 @@
 // Angular
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // NgRx
 import { Store } from '@ngrx/store';
 import * as fromAppReducer from '../../store/app.reducer'
 import * as shoppingListActions from '../../shopping-list/store/shopping-list.actions';
+import * as RecipeBookActions from '../../recipe-book/store/recipe-book.actions';
 
 // Components, Services & Models
-import { RecipesService } from 'src/app/recipe-book/recipes.service';
 import { Recipe } from '../recipe.model';
+import { RecipeBookState } from '../store/recipe-book-reducer';
 
 @Component({
   selector: 'app-recipe-details',
   templateUrl: './recipe-details.component.html',
   styleUrls: ['./recipe-details.component.css']
 })
-export class RecipeDetailsComponent {
+export class RecipeDetailsComponent implements OnInit, OnDestroy {
+  recipeBookSubscription: Subscription;
   recipe: Recipe;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private recipesService: RecipesService,
     private store: Store<fromAppReducer.AppState>
   ) { }
 
   ngOnInit() {
     this.route.params.subscribe((routeParams: Params) => {
-      this.recipe = this.recipesService.getRecipe(routeParams['recipeId'])
+      this.recipeBookSubscription = this.store.select('recipeBook')
+        .pipe(
+          map((recipeBookState: RecipeBookState) => {
+            return recipeBookState.recipes;
+          })
+        )
+        .subscribe((recipes: Recipe[]) => {
+          this.recipe = recipes.find((recipe: Recipe) => {
+            return recipe.recipeId === +routeParams['recipeId'];
+          });
+        })
     })
   }
 
   onToShoppingList(): void {
-    // this.store.dispatch(new shoppingListActions.AddIngredientsAction(this.recipe.ingredients));
     this.store.dispatch(shoppingListActions.addIngredientsAction({ ingredients: this.recipe.ingredients }))
   }
 
@@ -42,7 +54,11 @@ export class RecipeDetailsComponent {
   }
 
   onDeleteRecipe(): void {
-    this.recipesService.deleteRecipe(this.recipe);
+    this.store.dispatch(RecipeBookActions.deleteRecipe({ recipe: this.recipe }))
     this.router.navigate(['recipe-book'])
+  }
+
+  ngOnDestroy(): void {
+    this.recipeBookSubscription?.unsubscribe();
   }
 }

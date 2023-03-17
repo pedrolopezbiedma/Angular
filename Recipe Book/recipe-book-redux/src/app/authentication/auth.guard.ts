@@ -8,16 +8,12 @@ import { map, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as fromAppReducer from '../store/app.reducer';
 
-// Components, Services & Models
-import { AuthenticationService } from 'src/app/authentication/authentication.service';
-
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
-    private authService: AuthenticationService,
     private router: Router,
     private store: Store<fromAppReducer.AppState>
-  ) {}
+  ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -27,7 +23,6 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Promise<boolean | UrlTree>
     | Observable<boolean | UrlTree> {
-    // return this.authService.authenticatedUser.pipe(
     return this.store.select('authentication').pipe(
       take(1),
       map(authenticationState => {
