@@ -22,7 +22,7 @@ const initialState: AuthenticationState = {
 const _authenticationReducer = createReducer(
   initialState,
 
-  on(AuthenticationActions.loginStartAction, (state, action) => {
+  on(AuthenticationActions.loginStartAction, (state) => {
     return {
       ...state,
       isLoading: true,
@@ -49,7 +49,32 @@ const _authenticationReducer = createReducer(
     }
   }),
 
-  on(AuthenticationActions.logoutAction, (state, action) => {
+  on(AuthenticationActions.signupStartAction, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+      error: null
+    }
+  }),
+
+  on(AuthenticationActions.signupSuccessAction, (state, action) => {
+    return {
+      ...state,
+      user: action.user,
+      isLoading: false,
+      error: null
+    }
+  }),
+
+  on(AuthenticationActions.signupErrorAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      error: action.errorMessage
+    }
+  }),
+
+  on(AuthenticationActions.logoutAction, (state) => {
     return {
       ...state,
       isLoading: false,

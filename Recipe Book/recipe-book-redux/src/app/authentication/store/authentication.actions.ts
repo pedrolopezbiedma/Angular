@@ -16,6 +16,25 @@ export const loginErrorAction = createAction(
   props<{ errorMessage: string }>()
 )
 
+export const signupStartAction = createAction(
+  '[Authorization] Signup Start',
+  props<{ email: string, password: string }>()
+)
+
+export const signupSuccessAction = createAction(
+  '[Authorization] Signup Success',
+  props<{ user: User }>()
+)
+
+export const signupErrorAction = createAction(
+  '[Authorization] Signup Error',
+  props<{ errorMessage: string }>()
+)
+
+export const autoLoginAction = createAction(
+  '[Authorization] Auto Login'
+)
+
 export const logoutAction = createAction(
   '[Authentication] Logout'
 )

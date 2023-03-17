@@ -1,36 +1,32 @@
 // Angular
-import { Component } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // NgGx
 import { Store } from '@ngrx/store';
 import * as fromAppReducer from '../store/app.reducer';
+import * as AuthenticationActions from '../authentication/store/authentication.actions'
 
 // Components, Services & Models
 import { DatabaseService } from '../shared/services/database.service';
-import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
+  authenticationStateSubscription: Subscription;
   userAuthenticated: boolean = false;
 
   constructor(
     private databaseService: DatabaseService,
-    private authenticationService: AuthenticationService,
     private store: Store<fromAppReducer.AppState>
-  ) {}
+  ) { }
 
   ngOnInit() {
-    // this.authenticationService.authenticatedUser
-    //   .subscribe(authenticatedUser => {
-    //     this.userAuthenticated = authenticatedUser && authenticatedUser?.token !== null ? true : false;
-    //     console.log('userIsAuthenticated -->', this.userAuthenticated);
-    //   })
-    this.store.select('authentication')
+    this.authenticationStateSubscription = this.store.select('authentication')
       .pipe(
         map((authenticationState) => {
           return authenticationState.user
@@ -38,11 +34,11 @@ export class NavbarComponent {
       ).subscribe(authenticatedUser => {
         this.userAuthenticated = authenticatedUser && authenticatedUser?.token !== null ? true : false;
         console.log('userIsAuthenticated -->', this.userAuthenticated);
-       })
+      })
   }
 
   onLogout(): void {
-    this.authenticationService.logout();
+    this.store.dispatch(AuthenticationActions.logoutAction());
   }
 
   onFetchData(): void {
@@ -51,5 +47,9 @@ export class NavbarComponent {
 
   onSaveData(): void {
     this.databaseService.storeRecipces();
+  }
+
+  ngOnDestroy(): void {
+    this.authenticationStateSubscription?.unsubscribe();
   }
 }
