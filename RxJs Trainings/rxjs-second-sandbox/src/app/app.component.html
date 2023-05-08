@@ -3,7 +3,7 @@
 <h2>Chapter 1</h2>
 <span>Showing the initial users observable</span>
 <ul>
-  <li *ngFor="let user of users$ | async">
+  <li *ngFor="let user of notUpdatedUsers$ | async">
     {{ user.firstName }}
     {{ user.lastName }}
     {{ user.age }}
@@ -23,3 +23,15 @@
 </ul>
 <hr>
 
+<span>Showing the orders observable</span>
+<p>Order is {{ orders$ | async }}</p>
+<hr>
+
+<span>Showing the information of an event observable</span>
+<br>
+<a #linkObservable href="http://localhost.es/1234" (mouseover)="getObservable()"> Hover to get an observable in the console</a>
+<hr>
+
+<span>Showing the information of an interval observable</span>
+<button (click)="stopSubscription()" >Stop internal subscription</button>
+<hr>
