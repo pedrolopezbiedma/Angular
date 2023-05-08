@@ -1,0 +1,25 @@
+<h3>This is the RxJs Playground</h3>
+
+<h2>Chapter 1</h2>
+<span>Showing the initial users observable</span>
+<ul>
+  <li *ngFor="let user of users$ | async">
+    {{ user.firstName }}
+    {{ user.lastName }}
+    {{ user.age }}
+    {{ user.email }}
+  </li>
+</ul>
+<hr>
+
+<span>Showing the updated users observable</span>
+<ul>
+  <li *ngFor="let user of updatedUsers$ | async">
+    {{ user.firstName }}
+    {{ user.lastName }}
+    {{ user.age }}
+    {{ user.email }}
+  </li>
+</ul>
+<hr>
+
