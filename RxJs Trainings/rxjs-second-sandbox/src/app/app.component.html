@@ -1,6 +1,5 @@
 <h3>This is the RxJs Playground</h3>
 
-<h2>Chapter 1</h2>
 <span>Showing the initial users observable</span>
 <ul>
   <li *ngFor="let user of notUpdatedUsers$ | async">
@@ -29,9 +28,57 @@
 
 <span>Showing the information of an event observable</span>
 <br>
-<a #linkObservable href="http://localhost.es/1234" (mouseover)="getObservable()"> Hover to get an observable in the console</a>
+<a #linkObservable href="http://localhost.es/1234" (mouseover)="getEventObservable()"> Hover to get an observable in the console</a>
 <hr>
 
 <span>Showing the information of an interval observable</span>
-<button (click)="stopSubscription()" >Stop internal subscription</button>
+<br>
+<button (click)="startSubscriptions()" >Start internal subscription</button>
+<button (click)="stopSubscriptions()" >Stop intervals</button>
+<hr>
+
+<h2>Search with RxJs</h2>
+<div [formGroup]="searchForm">
+  <input type="text" formControlName="name"/>
+</div>
+<hr>
+
+<span>Showing the categories observable with takeLast</span>
+<p>Categories is {{ categoriesTakeLast$ | async }}</p>
+<hr>
+
+<span>Showing the categories observable with first</span>
+<p>Categories is {{ categoriesFirst$ | async }}</p>
+<hr>
+
+<span>Showing the categories observable with last</span>
+<p>Categories is {{ categoriesLast$ | async }}</p>
+<hr>
+
+<span>Showing the categories observable with elementAt</span>
+<p>Categories is {{ categoriesElementAt$ | async }}</p>
+<hr>
+
+<span>Showing the categories observable with filter</span>
+<p>Categories is {{ categoriesFilter$ | async }}</p>
+<hr>
+
+<span>Showing the categories observable with distinct</span>
+<p>Categories is {{ categoriesDisctinct$ | async }}</p>
+<hr>
+
+<span>Showing the categories observable with skip</span>
+<p>Categories is {{ categoriesSkip$ | async }}</p>
+<hr>
+
+<span>Showing the categories observable with count</span>
+<p>Categories is {{ categoriesCount$ | async }}</p>
+<hr>
+
+<span>Showing the numbers observable with max</span>
+<p>Numbers is {{ numMax$ | async }}</p>
+<hr>
+
+<span>Showing the numbers observable with min</span>
+<p>Numbers is {{ numMin$ | async }}</p>
 <hr>
