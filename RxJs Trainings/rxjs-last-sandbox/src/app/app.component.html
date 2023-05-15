@@ -1,0 +1,48 @@
+<h1>The last RxJs Sandbox</h1>
+
+<span>Observable with interval behaviour</span>
+<p> {{ interval$ | async }} </p>
+<hr>
+
+<span>Observable with interval + map</span>
+<p> {{ mappedInterval$ | async }} </p>
+<hr>
+
+<span>Observable with interval + filter</span>
+<p> {{ filteredInterval$ | async }} </p>
+<hr>
+
+<span>Subject use with button </span>
+<button (click)="giveMeSubjectNotification()">Click me for a subject event emitted</button>
+<p> {{ emittedSubject$ | async }} </p>
+<hr>
+
+<div [formGroup]="form1">
+  <label for="input1">Write here: </label>
+  <input type="text" formControlName="input1"/>
+  <p> Subject has value: {{writtenInputSubject1 | async }} </p>
+</div>
+<hr>
+
+<span>Observable with reduce </span>
+<p> {{ reducedNumbers$ | async }} </p>
+<hr>
+
+<span>Observable with scan </span>
+<p> {{ scannedNumbers$ | async }} </p>
+<hr>
+
+<span>Observable concatenation with mergeMap </span>
+<div [formGroup]="form2">
+  <label for="input2">Write here: </label>
+  <input type="text" formControlName="input2"/>
+</div>
+<hr>
+
+<span>Observable concatenation with switchMap </span>
+<button (click)="startInterval($event)">Click me to start the iteration</button>
+<p> {{ fromEvent$ | async }} </p>
+
+<span>BehaviourSubject example</span>
+<button (click)="clickedBehaviourSubject()">Click me to start the iteration</button>
+<p> {{ clickedButton$ | async }} </p>
