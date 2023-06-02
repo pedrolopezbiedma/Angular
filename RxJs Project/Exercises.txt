@@ -1,0 +1,5 @@
+- Creamos un observable con interval 1000
+- Creamos tambien un observable con timer
+- Jugamos con ellos y disparamos el timer con hoyEn5
+
+- Cramos un observable con un fetch y from

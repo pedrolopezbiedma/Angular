@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, Subscription, interval } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-subject-definition',
@@ -45,6 +45,8 @@ export class SubjectDefinitionComponent implements OnInit {
     this.subject$.subscribe((value) => {
       console.log('[SUBJECT-DEFINITION: Interval2 logging --> ', value);
     });
+
+    this.subject$.next('Soy el subject');
   }
 
   stopInterval(): void {
