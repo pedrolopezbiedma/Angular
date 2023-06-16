@@ -1,0 +1,35 @@
+**\*** Observable Basics **\***
+
+**\*** Observable Creation **\***
+
+**\*** Basic Operators **\***
+
+**\*** Not Common Operators **\***
+
+- Take(x) --> Coge las primeras x emisiones de un observable y lo completa.
+
+- First(predicate) --> Coge la primera emision del observable. Se puede filtrar metiendo una funcion como predicate. Una vez emite, se completa.
+
+- TakeWhile(predicate, inclusive?) --> Emite emisiones del observable mientras que la condicion del predicate sea true. Si inclusive = true, entonces la emision con la que se rompe el takeWhile ( la ultima ) tambien se emite.
+
+- TakeUntil( finisherObservable$ ) --> Emite emisiones del observable hasta que finisher observable emite
+
+- skip(x) --> Ignora las x primeras emisiones del observable
+
+- distinct( keySelector ) --> Emite los valores sin repeticiones de un array. Para objetos no vale demasiado si no le ponemos un keySelector
+
+- distinctUntilChanged ( previous, current ) --> Emite lo valores del observable que no sean igual al previamente emitido. Si estamos usando objetos, necesitamos definir el comportamiento usando previous y current.
+
+- distinctUntilKeyChanged ('key' ) --> Emite valores de observable que no sean igual al previamente emitido basandose en la key para comprobar si es igual.
+
+**\*** Time Operators **\***
+
+- DebounceTime ( time ) --> Retrasa la emision de un observable por 'time' cantidad de tiempo. Normalmente, se combina con distinctUntilChange ( o similares ) para mejorar aun mas el no mandar emisiones con los mismos valores ( por si acaso, escribimos y borramos en un input por ejemplo )
+
+- ThrottleTime ( time, asyncScheduler, config?: {leading: ? , trailing }) --> Coge la primera emision de un observable e ignora las demas emisiones hasta que pase el 'time'. Una vez pasado, emite la siguiente tambien y vuelve a hacer lo mismo. Se puede configurar para que tambien emita la ultima emision dentro del tiempo de omision con el objeto config ( o que omita la primera, etc... )
+
+- SampleTime ( time ) --> Va haciendo emisiones del observable sobre el que funciona en intervalos de 'time'. Si el valor del observable no se ha actualizado desde la última emisión, no emite nada.
+
+- Sample( observable$ ) --> Emtie un valor del observable al que esta afectando cuando 'Observable$' emita un valor
+
+- AuditTime( time ) --> Ignora al observable durante los ultimos 'time' segundos. Despues, emite el ultimo valor del observable.

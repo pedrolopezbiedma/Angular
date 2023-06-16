@@ -1,18 +1,3 @@
-
-* Time operators
-
-- Hacer un ejercicio con debounceTime que ponga en la consola lo que escribimos en un input ( imaginando que vamos a hacer una peticion http con la busqueda )
- - Tenemos en cuenta que podamos borrar y escribir de nuevo durante el periodo del debounceTime
-
-- Hacer un ejercicio de throttleTime que ponga en la consola lo que escribamos en un input y ver lo que pasa.
-    - Hacemos otro ejercicio para usar throttleTime que incluya el priemro y el ultimo comportamiento.
-
-- Hacemos un ejemplo con sampleTime usando los anteriores como modelo. ( un ejercicio seria ver cuantas veces se ha clicado el raton en el tiempo definido? )
-
-- Hacer un ejemplo de sample con un interval y un observable de mouse clicks
-
-- Hacer otro ejemplo auditTime.
-
 ----- Ejercicios Finales -----
 
 - Vamos a crear un div y le vamos a poner de innerHTML un lorem ipsum de 5 parrafos.
@@ -30,4 +15,4 @@ ponemos tambien el append.
 ----- Ejercicios Finales -----
 
 ----- Hacer un postit o algo de todos los operadores que he visto en el curso para tenerlos en mente -----
------ Meter en el career path una seccion que sea cosas a aprender ( y meter el royo truthy & falsy y el tema signals de Angular 16, algo de CSS? ( TheNetNinja ) ) ------
+

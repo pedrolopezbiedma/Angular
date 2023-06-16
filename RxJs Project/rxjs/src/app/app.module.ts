@@ -8,6 +8,7 @@ import { SubjectDefinitionComponent } from './components/Obs_Basic/subject-defin
 import { CreationOperatorsComponent } from './components/Obs_Creation/creation-operators.component';
 import { BasicOperatorsComponent } from './components/Operators/Basic Operators/basic-operators.component';
 import { NotCommonOperatorsComponent } from './components/Operators/Not Common Operators/not-basic-operators/not-common-operators.component';
+import { TimeOperatorsComponent } from './components/Operators/Time Operators/time-operators/time-operators.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NotCommonOperatorsComponent } from './components/Operators/Not Common O
     CreationOperatorsComponent,
     BasicOperatorsComponent,
     NotCommonOperatorsComponent,
+    TimeOperatorsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
