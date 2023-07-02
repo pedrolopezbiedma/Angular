@@ -1,3 +1,5 @@
+
+
 ----- Ejercicios Finales -----
 
 - Vamos a crear un div y le vamos a poner de innerHTML un lorem ipsum de 5 parrafos.
@@ -13,6 +15,3 @@ ponemos tambien el append.
 - Para tener el % va a ser ( scrollTop / ( scrollHeight - clientHeight)) * 100
 
 ----- Ejercicios Finales -----
-
------ Hacer un postit o algo de todos los operadores que he visto en el curso para tenerlos en mente -----
-

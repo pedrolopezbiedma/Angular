@@ -1,10 +1,10 @@
-**\*** Observable Basics **\***
+***** Observable Basics *****
 
-**\*** Observable Creation **\***
+***** Observable Creation *****
 
-**\*** Basic Operators **\***
+*****Basic Operators *****
 
-**\*** Not Common Operators **\***
+***** Not Common Operators *****
 
 - Take(x) --> Coge las primeras x emisiones de un observable y lo completa.
 
@@ -22,7 +22,7 @@
 
 - distinctUntilKeyChanged ('key' ) --> Emite valores de observable que no sean igual al previamente emitido basandose en la key para comprobar si es igual.
 
-**\*** Time Operators **\***
+***** Time Operators *****
 
 - DebounceTime ( time ) --> Retrasa la emision de un observable por 'time' cantidad de tiempo. Normalmente, se combina con distinctUntilChange ( o similares ) para mejorar aun mas el no mandar emisiones con los mismos valores ( por si acaso, escribimos y borramos en un input por ejemplo )
 
@@ -33,3 +33,15 @@
 - Sample( observable$ ) --> Emtie un valor del observable al que esta afectando cuando 'Observable$' emita un valor
 
 - AuditTime( time ) --> Ignora al observable durante los ultimos 'time' segundos. Despues, emite el ultimo valor del observable.
+
+***** Transformation Operators *****
+
+- mergeAll -->
+
+- mergeMap -->
+
+- switchMap
+
+- concatMap
+
+- exhaustMap
