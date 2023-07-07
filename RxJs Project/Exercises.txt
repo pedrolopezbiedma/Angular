@@ -1,5 +1,3 @@
-
-
 ----- Ejercicios Finales -----
 
 - Vamos a crear un div y le vamos a poner de innerHTML un lorem ipsum de 5 parrafos.

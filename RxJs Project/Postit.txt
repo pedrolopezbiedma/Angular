@@ -36,12 +36,12 @@
 
 ***** Transformation Operators *****
 
-- mergeAll -->
+- mergeAll --> Recibe como input un Observable y lo que hace es subscribirse a el y proporcionar la respuesta.
 
-- mergeMap -->
+- mergeMap --> Ejecuta el observable que tiene dentro y se subscribe a el y proporciona el resultado
 
-- switchMap
+- switchMap --> Si se recibe otra emision, se cancela la anterior
 
-- concatMap
+- concatMap --> Si se recibe una emision nueva, se guarda en una cola, y se concatena a cuando termina la que hay en curso.
 
-- exhaustMap
+- exhaustMap --> Si se recibe una emision nueva, se ignora si hay alguna en curso ya.
