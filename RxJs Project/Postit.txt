@@ -34,6 +34,8 @@
 
 - AuditTime( time ) --> Ignora al observable durante los ultimos 'time' segundos. Despues, emite el ultimo valor del observable.
 
+- ToArray () --> Aguanta las emisiones de un observable hasta que se completa, y entonces crea una emision de lo que tiene aguantado como un array
+
 ***** Transformation Operators *****
 
 - mergeAll --> Recibe como input un Observable y lo que hace es subscribirse a el y proporcionar la respuesta.
@@ -45,3 +47,17 @@
 - concatMap --> Si se recibe una emision nueva, se guarda en una cola, y se concatena a cuando termina la que hay en curso.
 
 - exhaustMap --> Si se recibe una emision nueva, se ignora si hay alguna en curso ya.
+
+***** Combination Operators *****
+
+- startWith() & endWith() --> 
+
+- concat( obs1, obs2, obs3 ) --> concatena las emisiones de los observables incluidos en la funcion.
+
+- merge ( obs1, obs2 ) --> Junta las emisiones de 2 observables en 1 solo
+
+- combineLatest({ alias1: obs1, alias2: obs2 }) --> Empieza a emitir una vez que los 2 observables han emitido un valor. En ese caso, emitira un array con [val del obser1 y val del obser2]. Una vez ha pasado eso, cada vez que uno de los observbales emite 1 valor, emite un array con el ultimo valor emitido de cada uno de los observables.
+
+- zip({ alias1: obs1, alias2: obs2 }) --> Emite cada vez que todos los observables introducidos han emitido el mismo numero de veces, por ejemplo, emite 1 vez cuando todos los observables han emiteido 1 vez, y entonces emite un array con esos valores.
+
+- forkJoin( {alias1: obs1, alias2: obs2} ) -> Emitira un array con la ultima emision de cada uno de los operadores una vez todos se completen. Si no se completan, no dara ninguna salida. Si uno de los observables de dentro da un pete y no catcheamos la excepcion, la salida sera esa excepcion.

@@ -10,6 +10,8 @@ import { BasicOperatorsComponent } from './components/Operators/Basic Operators/
 import { NotCommonOperatorsComponent } from './components/Operators/Not Common Operators/not-basic-operators/not-common-operators.component';
 import { TimeOperatorsComponent } from './components/Operators/Time Operators/time-operators/time-operators.component';
 import { TransformationOperatorsComponent } from './components/Operators/Transformation Operators/transformation-operators/transformation-operators.component';
+import { ObsCombinationComponent } from './components/Obs_Combination/obs-combination/obs-combination.component';
+import { ExercisesComponent } from './components/Exercises/exercises/exercises.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { TransformationOperatorsComponent } from './components/Operators/Transfo
     NotCommonOperatorsComponent,
     TimeOperatorsComponent,
     TransformationOperatorsComponent,
+    ObsCombinationComponent,
+    ExercisesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

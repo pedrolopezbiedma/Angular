@@ -13,3 +13,8 @@ ponemos tambien el append.
 - Para tener el % va a ser ( scrollTop / ( scrollHeight - clientHeight)) * 100
 
 ----- Ejercicios Finales -----
+
+- Dejar un postit guay de cada uno de los observables y plastificarlo para tenerlo siempre a mano.
+- Dejar una reseña del curso en Udemy.
+- Subir el curso a Linkedin
+- 
