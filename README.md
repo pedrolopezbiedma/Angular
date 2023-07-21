@@ -8,15 +8,7 @@ Projects inside the repository are:
 
 - **Lectures Apps**: Folder containing all the projects created to follow the course modules.
 
-- **Recipe Book**: This is the course project, where all the knowledge adquired is put together. Its basically a recipe book together with an Shopping list. Its main features are:
-
-- Firebase integration as a backend.
-- Authorization.
-- Routing.
-- Forms.
-- Http requests.
-- Redux.
-- Several other features...
+- **Recipe Book**: This is the course project, where all the knowledge adquired is put together. Its basically a recipe book together with an Shopping list. Its main features are: Firebase integration as a backend, Authorization, Routing, Forms, Http requests, Redux, Several other features...
 
 ## Run Locally
 
