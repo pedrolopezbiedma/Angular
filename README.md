@@ -1,4 +1,4 @@
-# React_Training
+# Angular_Training
 
 Repository created following this [Udemy Course](https://www.udemy.com/course/the-complete-guide-to-angular-2/) to learn everything about Angular.
 
