@@ -38,4 +38,4 @@ Start the server
 
 ## Authors
 
-- [@pedrolopezbiedma2](https://github.com/pedrolopezbiedma)
+- [@pedrolopezbiedma](https://github.com/pedrolopezbiedma)
