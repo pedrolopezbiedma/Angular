@@ -1,21 +1,37 @@
-# Angular_Training
+# Angular
 
-Repository created following this [Udemy Course](https://www.udemy.com/course/the-complete-guide-to-angular-2/) to learn everything about Angular.
+Repository created following this [Udemy Course](https://www.udemy.com/course/the-complete-guide-to-angular-2/) to learn Angular.
 
-Projects inside the repository are:
+Concepts:
 
-- **Assignment Apps**: Folder containing all the exercises projects created to check my understanding of some of the course modules: Basics, Forms, Routing, etc...
+- Basics of Angular.
+- Databinding.
+- Component communication.
+- Forms.
+- Pipes.
+- Services.
+- Directives.
+- Http Client.
+- Observables & RxJS
+- Routing
+- Modules
+- NgRx ( Redux )
+- Angular CLI.
 
-- **Lectures Apps**: Folder containing all the projects created to follow the course modules.
+## Folder Structure
 
-- **Recipe Book**: This is the course project, where all the knowledge adquired is put together. Its basically a recipe book together with an Shopping list. Its main features are: Firebase integration as a backend, Authorization, Routing, Forms, Http requests, Redux, Several other features...
+- **Assignment Apps**: Proposed exercises from the course.
+- **Lectures Apps**: Apps to follow the different course concepts.
+- **Recipe Book**:
+  - **recipe-book**: Course project
+  - **recipe-book-redux**: Course project implemented using NgRx
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/pedrolopezbiedma/Angular_Training.git
+  git clone https://github.com/pedrolopezbiedma/Angular.git
 ```
 
 Go to the any of the repository projects
